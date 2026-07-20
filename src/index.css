@@ -1,0 +1,285 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap");
+@import "tailwindcss";
+
+:root {
+  font-family: "Nunito", ui-rounded, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #26283f;
+  background: #f8f8fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(89, 101, 244, 0.24);
+  outline-offset: 2px;
+}
+
+.donation-widget {
+  contain: layout style;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: #55576d;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.form-input {
+  width: 100%;
+  height: 2.75rem;
+  border: 1px solid #dedee7;
+  border-radius: 0.75rem;
+  background: #fafafd;
+  padding: 0 0.85rem;
+  color: #31334a;
+  font-size: 0.8rem;
+  font-weight: 700;
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.form-input::placeholder {
+  color: #b0b1be;
+  font-weight: 600;
+}
+
+.form-input:focus {
+  border-color: #7b84f7;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(89, 101, 244, 0.11);
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.print-sheet {
+  display: none;
+}
+
+::selection {
+  background: #dfe2ff;
+  color: #343fae;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 11mm 13mm;
+  }
+
+  html,
+  body {
+    min-width: 0;
+    background: #fff !important;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .app-shell {
+    display: block !important;
+    min-height: 0 !important;
+    background: #fff !important;
+  }
+
+  .app-shell > :not(.print-sheet) {
+    display: none !important;
+  }
+
+  .print-sheet {
+    display: block !important;
+    color: #252740;
+    font-family: "Nunito", Arial, sans-serif;
+  }
+
+  .print-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-bottom: 2px solid #5965f4;
+    padding-bottom: 4mm;
+  }
+
+  .print-brand {
+    margin: 0 0 1mm;
+    color: #5965f4;
+    font-size: 10pt;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+  }
+
+  .print-header h1 {
+    margin: 0;
+    font-size: 20pt;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+  }
+
+  .print-header p:not(.print-brand) {
+    margin: 1mm 0 0;
+    color: #6d6f82;
+    font-size: 8.5pt;
+    font-weight: 700;
+  }
+
+  .print-week {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1mm;
+    font-size: 8.5pt;
+  }
+
+  .print-week strong {
+    font-size: 10pt;
+  }
+
+  .print-week span {
+    color: #77798c;
+  }
+
+  .print-days {
+    margin-top: 4mm;
+  }
+
+  .print-day {
+    margin-bottom: 3.2mm;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-day-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-left: 3px solid #5965f4;
+    background: #f0f1ff;
+    padding: 1.6mm 2.5mm;
+  }
+
+  .print-day-heading h2 {
+    margin: 0;
+    font-size: 10pt;
+    font-weight: 900;
+  }
+
+  .print-day-heading span {
+    color: #707287;
+    font-size: 7.5pt;
+    font-weight: 700;
+  }
+
+  .print-day table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 7.6pt;
+  }
+
+  .print-day th,
+  .print-day td {
+    border: 1px solid #e1e2e9;
+    padding: 1.55mm 2.2mm;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  .print-day th {
+    background: #f8f8fb;
+    color: #727488;
+    font-size: 6.8pt;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .print-day th:nth-child(1),
+  .print-day td:nth-child(1) {
+    width: 23%;
+  }
+
+  .print-day th:nth-child(2),
+  .print-day td:nth-child(2) {
+    width: 32%;
+    font-weight: 900;
+  }
+
+  .print-day th:nth-child(3),
+  .print-day td:nth-child(3) {
+    width: 25%;
+  }
+
+  .print-day th:nth-child(4),
+  .print-day td:nth-child(4) {
+    width: 20%;
+  }
+
+  .print-subject-mark {
+    display: inline-block;
+    width: 2mm;
+    height: 2mm;
+    margin-right: 1.5mm;
+    border-radius: 50%;
+    vertical-align: 0.2mm;
+  }
+
+  .print-empty {
+    color: #9697a5;
+    font-style: italic;
+    font-weight: 600 !important;
+    text-align: center !important;
+  }
+
+  .print-footer {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #dedfe7;
+    margin-top: 4mm;
+    padding-top: 2mm;
+    color: #9293a1;
+    font-size: 6.8pt;
+    font-weight: 700;
+  }
+}
