@@ -1,12 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;500;600;700;800;900&family=Quicksand:wght@500;600;700&display=swap");
 @import "tailwindcss";
 
 :root {
-  font-family: "Nunito", ui-rounded, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Quicksand", "Nunito", ui-rounded, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: #26283f;
   background: #f8f8fb;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+  font-size: 17px;
 }
 
 * {
@@ -42,35 +43,35 @@ select:focus-visible {
 
 .form-label {
   display: block;
-  margin-bottom: 0.45rem;
-  color: #55576d;
-  font-size: 0.75rem;
+  margin-bottom: 0.55rem;
+  color: #3f4060;
+  font-size: 0.9rem;
   font-weight: 800;
 }
 
 .form-input {
   width: 100%;
-  height: 2.75rem;
-  border: 1px solid #dedee7;
-  border-radius: 0.75rem;
-  background: #fafafd;
-  padding: 0 0.85rem;
-  color: #31334a;
-  font-size: 0.8rem;
+  height: 3rem;
+  border: 2px solid #e3e4f0;
+  border-radius: 1rem;
+  background: #fff;
+  padding: 0 1rem;
+  color: #1f203a;
+  font-size: 0.95rem;
   font-weight: 700;
   outline: none;
   transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
 }
 
 .form-input::placeholder {
-  color: #b0b1be;
+  color: #9899b0;
   font-weight: 600;
 }
 
 .form-input:focus {
   border-color: #7b84f7;
   background: #fff;
-  box-shadow: 0 0 0 3px rgba(89, 101, 244, 0.11);
+  box-shadow: 0 0 0 4px rgba(89, 101, 244, 0.12);
 }
 
 .scrollbar-none {
