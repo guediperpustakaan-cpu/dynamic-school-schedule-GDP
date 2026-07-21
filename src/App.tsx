@@ -47,7 +47,7 @@ type Lesson = {
 type LessonForm = Omit<Lesson, "id">;
 
 const SUBJECT_COLORS = ["#5B66F6", "#FF8A65", "#16A085", "#E4A11B", "#A66DE8", "#E85976"];
-const DONATION_AMOUNTS = [5000, 10000, 20000, 50000];
+const DONATION_AMOUNTS = [6000, 12000, 24000, 60000];
 
 // Isi dengan alamat gambar atau data URL QRIS resmi milik pengelola aplikasi.
 const QRIS_IMAGE_URL = "";
@@ -395,8 +395,8 @@ function DonationWidget() {
 
   const applyCustomAmount = () => {
     const value = Number(customAmount);
-    if (!Number.isFinite(value) || value < 5000) {
-      setNotice("Nominal paling sedikit Rp5.000.");
+    if (!Number.isFinite(value) || value < 6000) {
+      setNotice("Nominal paling sedikit Rp6.000.");
       return;
     }
     setAmount(Math.floor(value));
@@ -472,7 +472,7 @@ function DonationWidget() {
                       <span className="mr-1 text-xs font-black text-[#8b7a72]">Rp</span>
                       <input
                         type="number"
-                        min="5000"
+                        min="6000"
                         step="1000"
                         inputMode="numeric"
                         value={customAmount}
@@ -492,15 +492,16 @@ function DonationWidget() {
                     <button type="button" onClick={copyAmount} className="flex items-center gap-1.5 text-[10px] font-black text-[#db683f] hover:text-[#b94e29]"><Copy size={13} /> Salin nominal</button>
                   </div>
 
-                  <div className="mx-auto mt-3 w-[190px]">
-                    {qrisAvailable ? <img src={QRIS_IMAGE_URL} alt="Kode QRIS untuk traktiran KelasKu" className="aspect-square w-full rounded-2xl border border-[#eee7dd] bg-white object-contain p-2" /> : <QrisPlaceholder />}
-                  </div>
-                  <div className="mt-3 text-center">
-                    <p className="text-base font-black text-[#3b3030]">{formatRupiah(amount)}</p>
-                    <p className="mt-1 text-[10px] font-semibold leading-4 text-[#887a74]">Pindai melalui aplikasi pembayaran yang mendukung QRIS.</p>
-                  </div>
+                   <div className="mx-auto mt-3 w-[190px]">
+                     {qrisAvailable ? <img src={QRIS_IMAGE_URL} alt="Kode QRIS untuk traktiran KelasKu" className="aspect-square w-full rounded-2xl border border-[#eee7dd] bg-white object-contain p-2" /> : <QrisPlaceholder />}
+                   </div>
+                   <div className="mt-3 text-center">
+                     <p className="text-base font-black text-[#3b3030]">{formatRupiah(amount)}</p>
+                     <p className="mt-1 text-[10px] font-semibold leading-4 text-[#887a74]">Pindai melalui aplikasi pembayaran yang mendukung QRIS.</p>
+                   </div>
+                   <a href="https://trakteer.id/perpus_opera/" target="_blank" rel="noopener noreferrer" className="mt-3 flex items-center justify-center gap-1.5 text-[10px] font-black text-[#db683f] hover:text-[#b94e29]">Atau donasi langsung via Trakteer <Coffee size={12} /></a>
 
-                  {!qrisAvailable && (
+                   {!qrisAvailable && (
                     <div className="mt-4 flex gap-2 rounded-xl border border-[#f0d7ba] bg-[#fff7e9] p-3 text-[#8a5c25]">
                       <ShieldCheck size={16} className="mt-0.5 shrink-0" />
                       <p className="text-[10px] font-bold leading-4">QRIS resmi belum dipasang. Pengelola perlu memasukkan gambar QRIS sebelum traktiran dapat diterima.</p>
@@ -520,6 +521,9 @@ function DonationWidget() {
                 <motion.p initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} role="status" className="sticky bottom-3 mx-5 mb-3 rounded-xl bg-[#3b3440] px-3 py-2 text-center text-[10px] font-bold text-white shadow-lg">{notice}</motion.p>
               )}
             </AnimatePresence>
+            <div className="border-t border-[#f0e7df] px-5 py-3 text-center">
+              <p className="text-[9px] font-bold text-[#9b8d86]">Open Source oleh MZF - 2026</p>
+            </div>
           </motion.section>
         )}
       </AnimatePresence>
