@@ -661,12 +661,19 @@ function formatDate(date: string) {
   return new Intl.DateTimeFormat("id-ID", { day: "numeric", month: "short", year: "numeric" }).format(new Date(date));
 }
 
-function Dashboard({ lessons, tasks, grades }: { lessons: Lesson[]; tasks: Task[]; grades: Grade[] }) {
+function Dashboard({ lessons, tasks, grades, userName, userClass }: { lessons: Lesson[]; tasks: Task[]; grades: Grade[]; userName: string; userClass: string }) {
   const today = new Date().getDay();
   const todayDay = DAYS[Math.min(Math.max(today - 1, 0), 4)] as Day;
   const todayLessons = lessons.filter((l) => l.day === todayDay);
   const pendingTasks = tasks.filter((t) => t.status !== "selesai");
   const avgScore = grades.length > 0 ? Math.round(grades.reduce((sum, g) => sum + (g.score / g.maxScore) * 100, 0) / grades.length) : 0;
+
+  const initials = userName
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
 
   const quotes = [
     { text: "Belajar dengan giat adalah langkah awal menuju masa depan yang cerah!", color: "bg-[#eef0ff] text-[#5965f4]", icon: "🚀" },
@@ -692,6 +699,14 @@ function Dashboard({ lessons, tasks, grades }: { lessons: Lesson[]; tasks: Task[
       <div>
         <h2 className="text-[28px] font-extrabold tracking-[-0.045em] text-[#22243c] sm:text-[34px]">Beranda</h2>
         <p className="mt-1.5 text-sm font-medium text-[#85869a]">Ringkasan aktivitas belajarmu hari ini.</p>
+      </div>
+
+      <div className="flex flex-col gap-4 rounded-[28px] border border-[#e7e7ee] bg-gradient-to-br from-white to-[#f8f8ff] p-6 shadow-[0_4px_20px_rgba(45,47,75,0.035)] sm:flex-row sm:items-center sm:gap-6 sm:p-7">
+        <div className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-[#ffe3ba] text-xl font-black text-[#81501c] sm:h-20 sm:w-20 sm:text-2xl">{initials}</div>
+        <div className="min-w-0">
+          <p className="text-lg font-black text-[#23253d] sm:text-xl">{userName}</p>
+          <p className="mt-1 text-sm font-bold text-[#9697a8]">Kelas {userClass}</p>
+        </div>
       </div>
 
       <div className="overflow-hidden rounded-[28px] border border-[#e7e7ee] bg-white shadow-[0_4px_20px_rgba(45,47,75,0.035)]">
@@ -1221,8 +1236,8 @@ function Pengaturan({ lessons, tasks, grades, userName, onUpdateUserName, userCl
           </div>
           <div className="mt-5 rounded-2xl border border-[#e7e7ee] bg-[#fafafd] p-5">
             <h4 className="text-sm font-black text-[#23253d]">Unduh Source Code</h4>
-            <p className="mt-2 text-sm font-bold text-[#85869a]">Untuk mengunduh source code lengkap, silakan kunjungi repositori GitHub/GitLab proyek ini.</p>
-            <button type="button" onClick={() => alert("Fitur download source code akan segera tersedia.")} className="mt-3 flex items-center gap-2 rounded-xl border border-[#e7e7ee] bg-white px-4 py-2.5 text-sm font-extrabold text-[#5965f4] hover:border-[#c9cbe9]">
+            <p className="mt-2 text-sm font-bold text-[#85869a]">Untuk mengunduh source code lengkap, silakan kunjungi repositori GitHub/GitLab proyek ini atau jalankan perintah git clone di terminal.</p>
+            <button type="button" onClick={() => { navigator.clipboard.writeText("git clone https://github.com/username/repository.git").then(() => alert("Perintah git clone sudah disalin ke clipboard. Tempel di terminal untuk mengunduh source code.")).catch(() => alert("Salin manual: git clone https://github.com/username/repository.git")); }} className="mt-3 flex items-center gap-2 rounded-xl border border-[#e7e7ee] bg-white px-4 py-2.5 text-sm font-extrabold text-[#5965f4] hover:border-[#c9cbe9]">
               <Download size={17} /> Download Source Code
             </button>
           </div>
@@ -1469,7 +1484,7 @@ export default function App() {
                 </section>
               </motion.div>
             )}
-            {currentView === "beranda" && <Dashboard key="beranda" lessons={lessons} tasks={tasks} grades={grades} />}
+            {currentView === "beranda" && <Dashboard key="beranda" lessons={lessons} tasks={tasks} grades={grades} userName={userName} userClass={userClass} />}
             {currentView === "tugas" && <TugasSekolah key="tugas" tasks={tasks} setTasks={setTasks} />}
             {currentView === "nilai" && <CatatanNilai key="nilai" grades={grades} setGrades={setGrades} />}
             {currentView === "pengaturan" && <Pengaturan key="pengaturan" lessons={lessons} tasks={tasks} grades={grades} userName={userName} onUpdateUserName={setUserName} userClass={userClass} onUpdateUserClass={setUserClass} schoolName={schoolName} onUpdateSchoolName={setSchoolName} schoolLogo={schoolLogo} onUpdateSchoolLogo={setSchoolLogo} />}
